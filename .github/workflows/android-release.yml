@@ -1,0 +1,61 @@
+name: Release Android APK
+
+on:
+  repository_dispatch:
+    types: [android-tag-pushed]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source information
+        env:
+          SOURCE_TAG: ${{ github.event.client_payload.tag }}
+          SOURCE_SHA: ${{ github.event.client_payload.sha }}
+        run: |
+          [[ -n "$SOURCE_TAG" ]] || { echo 'Missing Android tag' >&2; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo 'Invalid Android commit SHA' >&2; exit 1; }
+
+      - name: Checkout Android source
+        uses: actions/checkout@v4
+        with:
+          repository: mutse/chitv-app-android
+          ref: ${{ github.event.client_payload.sha }}
+          token: ${{ secrets.ANDROID_SOURCE_TOKEN }}
+          persist-credentials: false
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+
+      - name: Publish APK to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.client_payload.tag }}
+          generate_release_notes: true
+          files: build/app/outputs/flutter-apk/app-release.apk
+          fail_on_unmatched_files: true

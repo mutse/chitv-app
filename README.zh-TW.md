@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://chitv.fit">
+    <img src="https://chitv.fit/logo.png" alt="ChiTV" width="128">
+  </a>
+</p>
+
 # ChiTV
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)

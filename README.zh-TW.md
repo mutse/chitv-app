@@ -1,12 +1,42 @@
-# ChiTV 發布
+# ChiTV
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
 
-當 `mutse/chitv-app-android` 推送標籤時，自動建置 Android APK，並發布至本儲存庫的 GitHub Releases。
+## 隨時隨地，暢享視頻
 
-## 設定步驟
+ChiTV 是一款基於 SwiftUI 構建的跨平台視頻流媒體應用，支持 macOS、iOS 和 tvOS，為您帶來極致的觀看體驗。安卓版基於 Flutter 構建。
 
-1. 在 `mutse/chitv-app-android` 中新增 Actions secret `CHITV_RELEASE_DISPATCH_TOKEN`：使用可存取 `mutse/chitv-app` 且具有 **Contents: read and write** 權限的細緻權限個人存取權杖，允許工作流程在本儲存庫發布 Release。
-2. 向 `mutse/chitv-app-android` 推送新標籤。其工作流程會建置該確切提交，並以相同標籤在本儲存庫發布 `app-release.apk`。如果本儲存庫尚無對應標籤，GitHub 會建立該標籤。
+## 支援平台
 
-如果發布失敗，請檢查 Android 儲存庫的 Actions 執行紀錄。Android 專案目前的 release 設定使用偵錯簽署金鑰，因此產生的 APK 沒有穩定的正式簽署身分。
+- macOS、iOS、tvOS（SwiftUI 原生版）
+- Android（Flutter 版）
+
+## 核心特性
+
+- **跨平台支持** — 一次開發，多端運行。支持 macOS、iOS 和 tvOS，在任何設備上享受一致體驗。
+- **智能搜索** — 強大的視頻搜索引擎，快速找到您想看的內容，支持搜索歷史記錄。
+- **高清播放** — 支持 HLS 流媒體協議，自適應碼率切換，流暢播放高清視頻。
+- **收藏夾** — 一鍵收藏喜愛的視頻，隨時回看。支持本地持久化存儲，數據永不丟失。
+- **觀看歷史** — 自動記錄觀看進度和歷史，輕鬆續看。智能排序，最近觀看優先顯示。
+- **暗色主題** — 精心設計的暗色主題，保護視力，提升觀看沉浸感。支持亮暗雙主題切換。
+
+本地收藏與觀看歷史無需帳號即可使用；Apple 版登入 iCloud 後可透過雲端同步多裝置數據（Apple 版經 CloudKit）。
+
+## 安卓版
+
+ChiTV 是一款基於 Flutter/Dart 構建的視頻流媒體應用，支持 vod/cms 源視頻點播和直播源直播，為您帶來極致的觀看體驗。
+
+- **追劇黨私藏神器** — 首頁豆瓣熱門隨手翻，電影、劇集按分類瀏覽；繼續觀看回到上次離開的地方，斷點秒續看。
+- **一個搜索框，搞定今晚看什麼** — 聚合搜索 · 片源自由篩選 · 看過的一鍵續播
+- **豆瓣熱榜，高分好片一眼挑** — 豆瓣評分直接看 · 電影劇集同步上榜 · 一點即搜
+- **一鍵收藏，追劇進度不丟失** — 收藏、歷史、繼續看三合一 · 本地保存，隨時續播
+- **選集秒跳轉，下一集一鍵接上** — 按名稱搜索 · 按集數跳轉 · 播放進度一目了然
+- **直播一鍵切，頻道隨心收藏** — 按頻道、分組或台標搜索 · 上下台快切 · 節目單隨時查
+
+技術亮點，Flutter 跨平台技術棧，為安卓深度優化：Flutter、Dart、HLS、Riverpod、Hive、Dio、Material 3。
+
+## 下載
+
+- 官網：https://chitv.fit
+- 安卓版：https://chitv.fit/android
+- 全部版本：https://github.com/mutse/chitv-app/releases
